@@ -37,25 +37,25 @@ function shoppingCartReducer(latestState, action){
         };
     } else if(action.type === "update-item"){
         const updatedItems = [...latestState.items];
-          const updatedItemIndex = updatedItems.findIndex(
-            (item) => item.id === action.payload.productId
-          );
-    
-          const updatedItem = {
-            ...updatedItems[updatedItemIndex],
-          };
-    
-          updatedItem.quantity += action.payload.amount;
-    
-          if (updatedItem.quantity <= 0) {
-            updatedItems.splice(updatedItemIndex, 1);
-          } else {
-            updatedItems[updatedItemIndex] = updatedItem;
-          }
-    
-          return {
-            items: updatedItems,
-          };
+        const updatedItemIndex = updatedItems.findIndex(
+        (item) => item.id === action.payload.productId
+        );
+
+        const updatedItem = {
+        ...updatedItems[updatedItemIndex],
+        };
+
+        updatedItem.quantity += action.payload.amount;
+
+        if (updatedItem.quantity <= 0) {
+        updatedItems.splice(updatedItemIndex, 1);
+        } else {
+        updatedItems[updatedItemIndex] = updatedItem;
+        }
+
+        return {
+        items: updatedItems,
+        };
     }
 }
 
