@@ -9,11 +9,11 @@ import ErrorBlock from '../UI/ErrorBlock';
 export default function FindEventSection() {
   const searchElement = useRef('');
   const [searchTerm, setSearchTerm] = useState();
-  console.log('searchterm', searchTerm)
+
   const { data, isError, error, isLoading } = useQuery({
-    queryKey: ['events', { search: searchTerm }],
-    queryFn: ({ signal }) => {
-      const data = fetchEvents({ signal, searchTerm });
+    queryKey: ['events', { searchTerm: searchTerm }],
+    queryFn: ({ signal, queryKey }) => {
+      const data = fetchEvents({ signal, ...queryKey[1] });
       return data;
     },
     enabled: searchTerm !== undefined,
