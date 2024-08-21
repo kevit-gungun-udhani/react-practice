@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import cityImg from '../assets/city.jpg';
 import heroImg from '../assets/hero.png';
-
+import { motion, useScroll, useTransform } from 'framer-motion';
 export default function WelcomePage() {
+  const {scrollY} = useScroll();
+  const opacityCity = useTransform(scrollY, [0, 200, 300, 500], [1, 0.5, 0.5, 0])
   return (
     <>
       <header id="welcome-header">
@@ -12,12 +14,13 @@ export default function WelcomePage() {
             Get Started
           </Link>
         </div>
-        <img
+        <motion.img
+          style={{opacity: opacityCity}}
           src={cityImg}
           alt="A city skyline touched by sunlight"
           id="city-image"
         />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+        <motion.img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
       </header>
       <main id="welcome-content">
         <section>
